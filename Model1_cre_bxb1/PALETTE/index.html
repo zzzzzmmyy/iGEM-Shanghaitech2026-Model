@@ -1,0 +1,478 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PALETTE</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&display=swap">
+<style>
+/* Tokens lifted from the ShanghaiTech-China 2026 wiki (--mosaic-*) so the page
+   sits inside the same design system. Layout: input rail, then a results stack. */
+:root{
+  --bg:#000; --dark:#0a0a0a; --card:#141416; --line:#26262a;
+  --fg:#f3f4f6; --gray:#d1d5db; --muted:#9ca3af;
+  --pink:#e84d85; --purple:#9b6ca8; --blue:#24b8ec; --lime:#c6da58; --orange:#ee7954;
+  --pink-soft:rgba(232,77,133,.12); --lime-soft:rgba(198,218,88,.22);
+  --gfp:#3ff063; --mch:#f0291e;
+  --f:'Lexend',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:16px;line-height:1.7;font-weight:300;margin:0}
+.wrap{max-width:1180px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:clamp(26px,6vw,32px);font-weight:800;letter-spacing:.02em;color:var(--blue);margin:0 0 4px}
+h1 .zh{display:block;font-size:.56em;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:7px}
+h2{font-size:clamp(20px,4.6vw,25.6px);font-weight:800;color:var(--fg);margin:0 0 4px}
+h2 .zh{font-weight:300;color:var(--muted);font-size:.72em;margin-left:9px}
+h3{font-size:clamp(19px,4vw,22px);font-weight:700;color:var(--fg);margin:0 0 14px;
+   border-left:4.7px solid var(--pink);padding-left:15px}
+h3 .zh{font-weight:300;color:var(--muted);font-size:.74em;margin-left:8px}
+.lbl{font-size:12px;font-weight:600;letter-spacing:.072em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.lbl .zh{text-transform:none;letter-spacing:0;font-weight:300;margin-left:7px}
+header{padding-block:44px 24px;border-bottom:1px solid var(--line)}
+.sub{color:var(--gray);max-width:64ch;margin:14px 0 0;font-size:15px}
+.sub .zh{display:block;color:var(--muted);margin-top:5px;font-size:14.5px}
+section{padding-block:30px;border-bottom:1px solid var(--line)}
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.g2{grid-template-columns:1.25fr .75fr}
+@media(max-width:900px){.g2{grid-template-columns:1fr}}
+input[type=number],input[type=text],textarea{width:100%;background:var(--card);color:var(--fg);
+  border:1px solid var(--line);border-radius:6px;padding:9px 12px;font-family:var(--f);font-size:14px;font-weight:400}
+textarea{min-height:92px;resize:vertical;word-break:break-all;font-size:12.5px;line-height:1.5}
+input:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+input[type=range]{width:100%;accent-color:var(--blue);background:transparent}
+.rngrow{display:flex;align-items:center;gap:12px}
+.rngval{font-weight:600;color:var(--blue);min-width:64px;text-align:right;font-variant-numeric:tabular-nums}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:var(--card);color:var(--muted);border:0;padding:9px 15px;font-family:var(--f);
+  font-size:13px;font-weight:400;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--pink-soft);color:var(--pink);font-weight:600}
+button.go{background:var(--pink-soft);color:var(--pink);border:1px solid var(--pink);border-radius:6px;
+  padding:10px 18px;font-family:var(--f);font-size:13.5px;font-weight:600;cursor:pointer}
+button.go:hover{background:rgba(232,77,133,.22)}
+button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:6px;
+  padding:10px 16px;font-family:var(--f);font-size:13.5px;cursor:pointer}
+button.ghost:hover{color:var(--fg);background:var(--card)}
+.row{display:flex;gap:11px;flex-wrap:wrap;align-items:center;margin-top:16px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 11px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{font-size:12px;font-weight:600;letter-spacing:.072em;text-transform:uppercase;color:var(--muted)}
+td{font-weight:300;color:var(--fg);font-variant-numeric:tabular-nums}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--card)}
+tr.pick td{background:var(--pink-soft)}
+tr.pick td:first-child{box-shadow:inset 3px 0 0 var(--pink)}
+.scroll{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:8px;background:var(--dark)}
+.scroll table{min-width:600px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
+.stat{display:flex;gap:26px;flex-wrap:wrap;margin-top:18px}
+.stat b{display:block;font-size:22px;font-weight:700;color:var(--lime);font-variant-numeric:tabular-nums;line-height:1.3}
+.stat span{font-size:12px;color:var(--muted);letter-spacing:.072em;text-transform:uppercase;font-weight:600}
+pre{font-family:ui-monospace,Consolas,monospace;font-size:11px;line-height:1.5;background:var(--dark);
+  border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto;max-height:300px;color:var(--gray);margin:14px 0 0}
+code{background:rgba(255,255,255,.06);color:var(--blue);padding:.1em .42em;border-radius:3px;font-size:.85em;font-family:var(--f)}
+svg{display:block;max-width:100%}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--orange);
+  border-radius:6px;padding:11px 14px;font-size:13.5px;color:var(--gray);margin-top:14px}
+footer{padding-block:26px 48px;color:var(--muted);font-size:13px}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="lbl">iGEM 2026 · ShanghaiTech-China · MOSAIC</p>
+  <h1>PALETTE</h1>
+  <p class="sub">Set a target fraction range and a payload sequence. The tool ranks Cre–Bxb1 circuit designs with the published model, predicts the ratio ladder they produce, and writes the engineered plasmid and the fragments to synthesise.
+  </p>
+</header>
+
+<section>
+  <h3>Design Input</h3>
+  <div class="grid g4">
+    <div><span class="lbl">Fraction min</span>
+      <input type="number" id="fmin" value="20" min="0" max="100" step="1"></div>
+    <div><span class="lbl">Fraction max</span>
+      <input type="number" id="fmax" value="60" min="0" max="100" step="1"></div>
+    <div><span class="lbl">Colony picks</span>
+      <input type="number" id="cols" value="96" min="1" max="384" step="1"></div>
+    <div><span class="lbl">Left arm (bp)</span>
+      <input type="number" id="larm" value="773" min="350" max="4000" step="1"></div>
+    <div><span class="lbl">Fragment name</span>
+      <input type="text" id="fname" value="YourFavouriteGene" placeholder="YourFavouriteGene" maxlength="28"></div>
+  </div>
+
+  <div style="margin-top:20px">
+    <span class="lbl">Readout time</span>
+    <div class="rngrow">
+      <input type="range" id="time" min="2" max="72" step="1" value="24">
+      <span class="rngval" id="timeVal">24 h</span>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:20px;align-items:start">
+    <div>
+      <span class="lbl">Payload sequence</span>
+      <textarea id="payload" spellcheck="false" placeholder="Paste DNA or FASTA"></textarea>
+      <div class="lbl" style="margin-top:6px;text-transform:none;letter-spacing:0;font-weight:300" id="pinfo"></div>
+    </div>
+    <div>
+      <span class="lbl">Insertion arm</span>
+      <div class="seg" role="group">
+        <button id="sideL" aria-pressed="false">Left · amilGFP</button>
+        <button id="sideR" aria-pressed="true">Right · mCherry</button>
+      </div>
+      <div class="note" id="sideNote"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="share" class="ghost">Copy shareable link</button>
+    <span class="lbl" id="shareMsg" style="text-transform:none;letter-spacing:0;margin:0;font-weight:300"></span>
+  </div>
+</section>
+
+<section>
+  <h3>Ranked Designs</h3>
+  <p class="sub" id="note"></p>
+  <div class="scroll"><table>
+    <thead><tr><th>Rank</th><th>lox71 sites</th><th>ns length (bp)</th><th>Fraction span</th>
+      <th>Types</th><th>In range</th><th>Array (bp)</th></tr></thead>
+    <tbody id="rank"></tbody></table></div>
+  <div class="stat" id="stats"></div>
+</section>
+
+<section>
+  <h3>Predicted Ratio Ladder</h3>
+  <div class="card"><div id="chart"></div></div>
+</section>
+
+<section>
+  <h3>Plate Simulation</h3>
+  <div class="grid g2" style="align-items:start">
+    <div class="card"><div id="plate"></div></div>
+    <div class="card"><div id="ptab"></div></div>
+  </div>
+</section>
+
+<section>
+  <h3>Plasmid Map</h3>
+  <div class="card" style="max-width:500px"><div id="map"></div></div>
+</section>
+
+<section>
+  <h3>Output Files</h3>
+  <div class="row">
+    <button id="dl1" class="go">Plasmid .gb</button>
+    <button id="dl2" class="go">Synthesis fragment .gb</button>
+    <button id="tog" class="ghost">Show text</button>
+  </div>
+  <div class="lbl" id="fraginfo" style="margin-top:14px;text-transform:none;letter-spacing:0;font-weight:300"></div>
+  <div id="warn"></div>
+  <pre id="prev" hidden></pre>
+</section>
+
+</div>
+
+<script>
+const P = {"A":"GAATTCGAGCTCGGTACCCGGGGATCCTATAAACGCAGAAAGGCCCACCCGAAGGTGAGCCAGTGTGACTCTAGTAGAGAGCGTTCACCGACAAACAACAGATAAAACGAAAGGCCCAGTCTTTCGACTGAGCCTTTCGTTTTATTTGATGCCTGGTTATTATTTAACCTTCAAAGGGTTAACATGAGCCGCGGCATGTGCTTCCAGCTTGACTGTAAAGCCTTTTGCACTTTGGCCAAGGTCGGTCCTCACAATTTGATGTTCTACGACATGATTCGGGGGCAGTGTGACCGGCTTCTCTGTTTTGTAAGTGGAGTGAAATTGGCATCTGTGAGAACCACCTCCTTCGAGCATAAGAAACATAGTCACGTCACCTCTTAGCACCTCTTTAGACACAGTCATTTTTTCGAAGGACTTATCCCAGTCAATTGTCTTCTTTTTCATTACGGGTCCATCAGCGGGAAAGTTTACGCCATGAAAGATGGATTTGTGGATGAAGCAATTTCCTTCGAGACGAATGTTCCAGCTGGCTGTAGCAACTGCTCCATCCTCAAATAGAAATGACCTTTCATATGACATTCCATCTGGGAATGCTTGCTTGAAATAGTCAGGCATGTCTGCCGGGTACTTTGTGAAGCAACGGTTTCCATATTGAAAGACTGATGACAGTATGTCAAAGGAGAATGGAAGGGGTTTTCCCGCAGGCTTGATGATCACTAATTCGGACATCTGTTTCCCTTCGTAAGGGTACCCAGTTCCTACACCTTCGATCGTAAATTCATGGCCATTGACACTGCCTTCCATATGGTATTTCGTCTTCATTTCTTGTACGATGCCATGCTTTGAATAAGACAT","B":"CTAGTATTTCCCCTCTTTCTCTAGTACGGCCGGCTTGTCGACGACGGCGGACTCCGTCGTCAGGATCATCCGGGC","C":"AGCGAAACGAAAAGAGGGAGACTAGCTCCCTCTTTCAACTGGCAAAAACAAAAACCCGTATAAACGCAGAAAGGCCCACCCGAAGGTGAGCCAGTGTGACTCTAGTAGAGAGCGTTCACCGACAAACAACAGATAAAACGAAAGGCCCAGTCTTTCGACTGAGCCTTTCGTTTTATTTGATGCCTGGGTTAAGCTACCTCGAGATTGAATACCAGCGAAAGTGAAACGTGATTTCATGCGTCATTTTGAACATTTTGTAAATCTTATTTAATAATGTGTGCGGCAATTCACATTTAATTTATGAATGTTTTCTTAACATCGCGGCAACTCAAGAAACGGCAGGTTCGGATGTCGTGGTTTGTCTGGTCAACCACCGCGGACTCAGTGGTGTACGGTACAAACCCCGACTTCTAAAGTTAAACAAAATTATTTGTAGAGGGAAACCGTTGTGCTCTCCCTGAATATATTATACGAGCCTTATGCATGCCCGTAAAGTTATCCAGCAACCACTCATAGACCTAGGGCAGCAGATAGGGACGACGTGGTGTTAGCTGTGCCATGGGTAGCTTAACCCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATACATATGCGATAATTCATCGCTCCCTTTTTCGTGCTTATAACTTCGTATAGCATACATTATACGAACGGTAATGAATTCATACCCGCCTTGTACAGCTCGTCCATGCCGCCGGTGGAGTGGCGGCCCTCGGCGCGTTCGTACTGTTCCACGATGGTGTAGTCCTCGTTGTGGGAGGTGATGTCCAACTTGATGTTGACGTTGTAGGCGCCGGGCAGCTGCACGGGCTTCTTGGCCTTGTAGGTGGTCTTGACCTCAGCGTCGTAGTGGCCGCCGTCCTTCAGCTTCAGCCTCTGCTTGATCTCGCCCTTCAGGGCGCCGTCCTCGGGGTACATCCGCTCGGAGGAGGCCTCCCAGCCCATCGTCTTCTTCTGCATTACGGGGCCGTCGGAGGGGAAGTTGGTGCCGCGCAGCTTCACCTTGTAGATGAACTCGCCGTCCTGCAGGGAGGAGTCCTGGGTCACGGTCACCACGCCGCCGTCCTCGAAGTTCATCACGCGCTCCCACTTGAAGCCCTCGGGGAAGGACAGCTTCAAGTAGTCGGGGATGTCGGCGGGGTGCTTCACGTAGGCCTTGGAGCCGTACATGAACTGAGGGGACAGGATGTCCCAGGCGAAGGGCAGGGGGCCACCCTTGGTCACCTTCAGCTTGGCGGTCTGGGTGCCCTCGTAGGGGCGGCCCTCGCCCTCGCCCTCGATCTCGAACTCGTGGCCGTTCACGGAGCCCTCCATGTGCACCTTGAAGCGCATGAACTCCTTGATGATGGCCATGTTATCCTCCTCGCCCTTGCTCACCAT","D":"GTAAGCTTACGCCCGGATGATCCTGACGACGGAGTCCGCCGTCGTCGACAAGCCGGCCG","E":"ATACTAGATATAAACGCAGAAAGGCCCACCCGAAGGTGAGCCAGTGTGACTCTAGTAGAGAGCGTTCACCGACAAACAACAGATAAAACGAAAGGCCCAGTCTTTCGACTGAGCCTTTCGTTTTATTTGATGCCTGGGTTAAGCTACTAAAGCGTAGTTTTCGTCGTTTGCAGCATCGCCATCTTCCAGCAGGCGCACCATTGCCCCTGTTTCACTATCCAGGTTACGGATATAGTTCATGACAATATTTACATTGGTCCAGCCACCAGCTTGCATGATCTCCGGTATTGAAACTCCAGCGCGGGCCATATCTCGCGCGGCTCCGACACGGGCACTGTGTCCAGACCAGGCCAGGTATCTCTGACCAGAGTCATCCTTAGCGCCGTAAATCAATCGATGAGTTGCTTCAAAAATCCCTTCCAGGGCGCGAGTTGATAGCTGGCTGGTGGCAGATGGCGCGGCAACACCATTTTTTCTGACCCGGCAAAACAGGTAGTTATTCGGATCATCAGCTACACCAGAGACGGAAATCCATCGCTCGACCAGTTTAGTTACCCCCAGGCTAAGTGCCTTCTCTACACCTGCGGTGCTAACCAGCGTTTTCGTTCTGCCAATATGGATTAACATTCTCCCACCGTCAGTACGTGAGATATCTTTAACCCTGATCCTGGCAATTTCGGCTATACGTAACAGGGTGTTATAAGCAATCCCCAGAAATGCCAGATTACGTATATCCTGGCAGCGATCGCTATTTTCCATGAGTGAACGAACCTGGTCGAAATCAGTGCGTTCGAACGCTAGAGCCTGTTTTGCACGTTCACCGGCATCAACGTTTTCTTTTCGGATCCGCCGCATAACCAGTGAAACAGCATTGCTGTCACTTGGTCGTGGCAGCCCGGACCGACGATGAAGCATGTTTAGCTGGCCCAAATGTTGCTGGATAGTTTTTACTGCCAGACCGCGCGCCTGAAGATATAGAAGATAATCGCGAACATCTTCAGGTTCTGCGGGAAACCATTTCCGGTTATTCAACTTGCACCATGCCGCCCACGACCGGCAAACGGACAGAAGCATTTTCCAGGTATGCTCAGAAAACGCCTGGCGATCCCTGAACATGTCCATCAGGTTCTTGCGAACCTCATCACTCGTTGCATCGACCGGTAATGCAGGCAAATTTTGGTGTACGGTCAGTAAATTGGACATCTAGTATTTCTCCTCTTTAGTAGAGAGTTGCGATAAAAAGCGTCAGGTAGGATCCGCTAATCTTATGGATAAAAATGCTATGGCATAGCAAAGTGTGACGCCGTGCAAATAATCAATGTGGACTTTTCTGCCGTGATTATAGACACTTTTGTTACGCGTTTTTGTCATGGCTTTGGTCCCGCTTTGTTACAGAATGCTTTTAATAAGCGGGGTTACCGGTTGGGTTAGCGAGAAGAGCCAGTAAAAGACGCAGTGACGGCAATGTCTGATGCAATATGGACAATTGGTTTCTTCTCTGAATGGTGGGAGTATGAAAAGTATGGCTGAAGCGCAAAATGATCCCCTGCTGCCGGGATACTCGTTTAACGCCCATCTGGTGGCGGGTTTAACGCCGATTGAGGCCAACGGTTATCTCGATTTTTTTATCGACCGACCGCTGGGAATGAAAGGTTATATTCTCAATCTCACCATTCGCGGTCAGGGGGTGGTGAAAAATCAGGGACGAGAATTTGTCTGCCGACCGGGTGATATTTTGCTGTTCCCGCCAGGAGAGATTCATCACTACGGTCGTCATCCGGAGGCTCGCGAATGGTATCACCAGTGGGTTTACTTTCGTCCGCGCGCCTACTGGCATGAATGGCTTAACTGGCCGTCAATATTTGCCAATACGGGTTTCTTTCGCCCGGATGAAGCGCACCAGCCGCATTTCAGCGACCTGTTTGGGCAAATCATTAACGCCGGGCAAGGGGAAGGGCGCTATTCGGAGCTGCTGGCGATAAATCTGCTTGAGCAATTGTTACTGCGGCGCATGGAAGCGATTAACGAGTCGCTCCATCCACCGATGGATAATCGGGTACGCGAGGCTTGTCAGTACATCAGCGATCACCTGGCAGACAGCAATTTTGATATCGCCAGCGTCGCACAGCATGTTTGCTTGTCGCCGTCGCGTCTGTCACATCTTTTCCGCCAGCAGTTAGGGATTAGCGTCTTAAGCTGGCGCGAGGACCAACGCATTAGTCAGGCGAAGCTGCTTTTGAGCACTACCCGGATGCCTATCGCCACCGTCGGTCGCAATGTTGGTTTTGACGATCAACTCTATTTCTCGCGAGTATTTAAAAAATGCACCGGGGCCAGCCCGAGCGAGTTTCGTGCCGGTTGTGAAGAAAAAGTGAATGATGTAGCCGTCAAGTTGTCATAACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATAGAGTATTCTATAGTGTCACCTAAATAGCTTGGCGTAATCATGGTCATAGCTGTTTCCTGTGTGAAATTGTTATCCGCTCACAATTCCACACAACATACGAGCCGGAAGCATAAAGTGTAAAGCCTGGGGTGCCTAATGAGTGAGCTAACTCACATTAATTGCGTTGCGCTCACTGCCCGCTTTCCAGTCGGGAAACCTGTCGTGCCAGCTGCATTAATGAATCGGCCAACGCGAACCCCTTGCGGCCGCCCGGGCCGTCGACCAATTCTCATGTTTGACAGCTTATCATCGAATTTCTGCCATTCATCCGCTTATTATCACTTATTCAGGCGTAGCAACCAGGCGTTTAAGGGCACCAATAACTGCCTTAAAAAAATTACGCCCCGCCCTGCCACTCATCGCAGTACTGTTGTAATTCATTAAGCATTCTGCCGACATGGAAGCCATCACAAACGGCATGATGAACCTGAATCGCCAGCGGCATCAGCACCTTGTCGCCTTGCGTATAATATTTGCCCATGGTGAAAACGGGGGCGAAGAAGTTGTCCATATTGGCCACGTTTAAATCAAAACTGGTGAAACTCACCCAGGGATTGGCTGAGACGAAAAACATATTCTCAATAAACCCTTTAGGGAAATAGGCCAGGTTTTCACCGTAACACGCCACATCTTGCGAATATATGTGTAGAAACTGCCGGAAATCGTCGTGGTATTCACTCCAGAGCGATGAAAACGTTTCAGTTTGCTCATGGAAAACGGTGTAACAAGGGTGAACACTATCCCATATCACCAGCTCACCGTCTTTCATTGCCATACGGAATTCCGGATGAGCATTCATCAGGCGGGCAAGAATGTGAATAAAGGCCGGATAAAACTTGTGCTTATTTTTCTTTACGGTCTTTAAAAAGGCCGTAATATCCAGCTGAACGGTCTGGTTATAGGTACATTGAGCAACTGACTGAAATGCCTCAAAATGTTCTTTACGATGCCATTGGGATATATCAACGGTGGTATATCCAGTGATTTTTTTCTCCATTTTAGCTTCCTTAGCTCCTGAAAATCTCGATAACTCAAAAAATACGCCCGGTAGTGATCTTATTTCATTATGGTGAAAGTTGGAACCTCTTACGTGCCGATCAACGTCTCATTTTCGCCAAAAGTTGGCCCAGGGCTTCCCGGTATCAACAGGGACACCAGGATTTATTTATTCTGCGAAGTGATCTTCCGTCACAGGTATTTATTCGCGATAAGCTCATGGAGCGGCGTAACCGTCGCACAGGAAGGACAGAGAAAGCGCGGATCTGGGAAGTGACGGACAGAACGGTCAGGACCTGGATTGGGGAGGCGGTTGCCGCCGCTGCTGCTGACGGTGTGACGTTCTCTGTTCCGGTCACACCACATACGTTCCGCCATTCCTATGCGATGCACATGCTGTATGCCGGTATACCGCTGAAAGTTCTGCAAAGCCTGATGGGACATAAGTCCATCAGTTCAACGGAAGTCTACACGAAGGTTTTTGCGCTGGATGTGGCTGCCCGGCACCGGGTGCAGTTTGCGATGCCGGAGTCTGATGCGGTTGCGATGCTGAAACAATTATCCTGAGAATAAATGCCTTGGCCTTTATATGGAAATGTGGAACTGAGTGGATATGCTGTTTTTGTCTGTTAAACAGAGAAGCTGGCTGTTATCCACTGAGAAGCGAACGAAACAGTCGGGAAAATCTCCCATTATCGTAGAGATCCGCATTATTAATCTCAGGAGCCTGTGTAGCGTTTATAGGAAGTAGTGTTCTGTCATGATGCCTGCAAGCGGTAACGAAAACGATTTGAATATGCCTTCAGGAACAATAGAAATCTTCGTGCGGTGTTACGTTGAAGTGGAGCGGATTATGTCAGCAATGGACAGAACAACCTAATGAACACAGAACCATGATGTGGTCTGTCCTTTTACAGCCAGTAGTGCTCGCCGCAGTCGAGCGACAGGGCGAAGCCCTCGAGTGAGCGAGGAAGCACCAGGGAACAGCACTTATATATTCTGCTTACACACGATGCCTGAAAAAACTTCCCTTGGGGTTATCCACTTATCCACGGGGATATTTTTATAATTATTTTTTTTATAGTTTTTAGATCTTCTTTTTTAGAGCGCCTTGTAGGCCTTTATCCATGCTGGTTCTAGAGAAGGTGTTGTGACAAATTGCCCTTTCAGTGTGACAAATCACCCTCAAATGACAGTCCTGTCTGTGACAAATTGCCCTTAACCCTGTGACAAATTGCCCTCAGAAGAAGCTGTTTTTTCACAAAGTTATCCCTGCTTATTGACTCTTTTTTATTTAGTGTGACAATCTAAAAACTTGTCACACTTCACATGGATCTGTCATGGCGGAAACAGCGGTTATCAATCACAAGAAACGTAAAAATAGCCCGCGAATCGTCCAGTCAAACGACCTCACTGAGGCGGCATATAGTCTCTCCCGGGATCAAAAACGTATGCTGTATCTGTTCGTTGACCAGATCAGAAAATCTGATGGCACCCTACAGGAACATGACGGTATCTGCGAGATCCATGTTGCTAAATATGCTGAAATATTCGGATTGACCTCTGCGGAAGCCAGTAAGGATATACGGCAGGCATTGAAGAGTTTCGCGGGGAAGGAAGTGGTTTTTTATCGCCCTGAAGAGGATGCCGGCGATGAAAAAGGCTATGAATCTTTTCCTTGGTTTATCAAACGTGCGCACAGTCCATCCAGAGGGCTTTACAGTGTACATATCAACCCATATCTCATTCCCTTCTTTATCGGGTTACAGAACCGGTTTACGCAGTTTCGGCTTAGTGAAACAAAAGAAATCACCAATCCGTATGCCATGCGTTTATACGAATCCCTGTGTCAGTATCGTAAGCCGGATGGCTCAGGCATCGTCTCTCTGAAAATCGACTGGATCATAGAGCGTTACCAGCTGCCTCAAAGTTACCAGCGTATGCCTGACTTCCGCCGCCGCTTCCTGCAGGTCTGTGTTAATGAGATCAACAGCAGAACTCCAATGCGCCTCTCATACATTGAGAAAAAGAAAGGCCGCCAGACGACTCATATCGTATTTTCCTTCCGCGATATCACTTCCATGACGACAGGATAGTCTGAGGGTTATCTGTCACAGATTTGAGGGTGGTTCGTCACATTTGTTCTGACCTACTGAGGGTAATTTGTCACAGTTTTGCTGTTTCCTTCAGCCTGCATGGATTTTCTCATACTTTTTGAACTGTAATTTTTAAGGAAGCCAAATTTGAGGGCAGTTTGTCACAGTTGATTTCCTTCTCTTTCCCTTCGTCATGTGACCTGATATCGGGGGTTAGTTCGTCATCATTGATGAGGGTTGATTATCACAGTTTATTACTCTGAATTGGCTATCCGCGTGTGTACCTCTACCTGGAGTTTTTCCCACGGTGGATATTTCTTCTTGCGCTGAGCGTAAGAGCTATCTGACAGAACAGTTCTTCTTTGCTTCCTCGCCAGTTCGCTCGCTATGCTCGGTTACACGGCTGCGGCGAGCGCTAGTGATAATAAGTGACTGAGGTATGTGCTCTTCTTATCTCCTTTTGTAGTGTTGCTCTTATTTTAAACAACTTTGCGGTTTTTTGATGACTTTGCGATTTTGTTGTTGCTTTGCAGTAAATTGCAAGATTTAATAAAAAAACGCAAAGCAATGATTAAAGGATGTTCAGAATGAAACTCATGGAAACACTTAACCAGTGCATAAACGCTGGTCATGAAATGACGAAGGCTATCGCCATTGCACAGTTTAATGATGACAGCCCGGAAGCGAGGAAAATAACCCGGCGCTGGAGAATAGGTGAAGCAGCGGATTTAGTTGGGGTTTCTTCTCAGGCTATCAGAGATGCCGAGAAAGCAGGGCGACTACCGCACCCGGATATGGAAATTCGAGGACGGGTTGAGCAACGTGTTGGTTATACAATTGAACAAATTAATCATATGCGTGATGTGTTTGGTACGCGATTGCGACGTGCTGAAGACGTATTTCCACCGGTGATCGGGGTTGCTGCCCATAAAGGTGGCGTTTACAAAACCTCAGTTTCTGTTCATCTTGCTCAGGATCTGGCTCTGAAGGGGCTACGTGTTTTGCTCGTGGAAGGTAACGACCCCCAGGGAACAGCCTCAATGTATCACGGATGGGTACCAGATCTTCATATTCATGCAGAAGACACTCTCCTGCCTTTCTATCTTGGGGAAAAGGACGATGTCACTTATGCAATAAAGCCCACTTGCTGGCCGGGGCTTGACATTATTCCTTCCTGTCTGGCTCTGCACCGTATTGAAACTGAGTTAATGGGCAAATTTGATGAAGGTAAACTGCCCACCGATCCACACCTGATGCTCCGACTGGCCATTGAAACTGTTGCTCATGACTATGATGTCATAGTTATTGACAGCGCGCCTAACCTGGGTATCGGCACGATTAATGTCGTATGTGCTGCTGATGTGCTGATTGTTCCCACGCCTGCTGAGTTGTTTGACTACACCTCCGCACTGCAGTTTTTCGATATGCTTCGTGATCTGCTCAAGAACGTTGATCTTAAAGGGTTCGAGCCTGATGTACGTATTTTGCTTACCAAATACAGCAATAGTAATGGCTCTCAGTCCCCGTGGATGGAGGAGCAAATTCGGGATGCCTGGGGAAGCATGGTTCTAAAAAATGTTGTACGTGAAACGGATGAAGTTGGTAAAGGTCAGATCCGGATGAGAACTGTTTTTGAACAGGCCATTGATCAACGCTCTTCAACTGGTGCCTGGAGAAATGCTCTTTCTATTTGGGAACCTGTCTGCAATGAAATTTTCGATCGTCTGATTAAACCACGCTGGGAGATTAGATAATGAAGCGTGCGCCTGTTATTCCAAAACATACGCTCAATACTCAACCGGTTGAAGATACTTCGTTATCGACACCAGCTGCCCCGATGGTGGATTCGTTAATTGCGCGCGTAGGAGTAATGGCTCGCGGTAATGCCATTACTTTGCCTGTATGTGGTCGGGATGTGAAGTTTACTCTTGAAGTGCTCCGGGGTGATAGTGTTGAGAAGACCTCTCGGGTATGGTCAGGTAATGAACGTGACCAGGAGCTGCTTACTGAGGACGCACTGGATGATCTCATCCCTTCTTTTCTACTGACTGGTCAACAGACACCGGCGTTCGGTCGAAGAGTATCTGGTGTCATAGAAATTGCCGATGGGAGTCGCCGTCGTAAAGCTGCTGCACTTACCGAAAGTGATTATCGTGTTCTGGTTGGCGAGCTGGATGATGAGCAGATGGCTGCATTATCCAGATTGGGTAACGATTATCGCCCAACAAGTGCTTATGAACGTGGTCAGCGTTATGCAAGCCGATTGCAGAATGAATTTGCTGGAAATATTTCTGCGCTGGCTGATGCGGAAAATATTTCACGTAAGATTATTACCCGCTGTATCAACACCGCCAAATTGCCTAAATCAGTTGTTGCTCTTTTTTCTCACCCCGGTGAACTATCTGCCCGGTCAGGTGATGCACTTCAAAAAGCCTTTACAGATAAAGAGGAATTACTTAAGCAGCAGGCATCTAACCTTCATGAGCAGAAAAAAGCTGGGGTGATATTTGAAGCTGAAGAAGTTATCACTCTTTTAACTTCTGTGCTTAAAACGTCATCTGCATCAAGAACTAGTTTAAGCTCACGACATCAGTTTGCTCCTGGAGCGACAGTATTGTATAAGGGCGATAAAATGGTGCTTAACCTGGACAGGTCTCGTGTTCCAACTGAGTGTATAGAGAAAATTGAGGCCATTCTTAAGGAACTTGAAAAGCCAGCACCCTGATGCGACCACGTTTTAGTCTACGTTTATCTGTCTTTACTTAATGTCCTTTGTTACAGGCCAGAAAGCATAACTGGCCTGAATATTCTCTCTGGGCCCACTGTTCCACTTGTATCGTCGGTCTGATAATCAGACTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATAATCAGACTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCATGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGAACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCACGGTCCCACTCGTATCGTCGGTCTGATTATTAGTCTGGGACCACGATCCCACTCGTGTTGTCGGTCTGATTATCGGTCTGGGACCACGGTCCCACTTGTATTGTCGATCAGACTATCAGCGTGAGACTACGATTCCATCAATGCCTGTCAAGGGCAAGTATTGACATGTCGTCGTAACCTGTAGAACGGAGTAACCTCGGTGTGCGGTTGTATGCCTGCTGTGGATTGCTGCTGTGTCCTGCTTATCCACAACATTTTGCGCACGGTTATGTGGACAAAATACCTGGTTACCCAGGCCGTGCCGGCACGTTAACCGGGCTGCATCCGATGCAAGTGTGTCGCTGTCGACGAGCTCGCGAGCTCGGACATGAGGTTGCCCCGTATTCAGTGTCGCTGATTTGTATTGTCTGAAGTTGTTTTTACGTTAAGTTGATGCAGATCAATTAATACGATACCTGCGTCATAATTGATTATTTGACGTGGTTTGATGGCCTCCACGCACGTTGTGATATGTAGATGATAATCATTATCACTTTACGGGTCCTTTCCGGTGATCCGACAGGTTACGGGGCGGCGACCTCGCGGGTTTTCGCTATTTATGAAAATTTTCCGGTTTAAGGCGTTTCCGTTCTTCTTCGTCATAACTTAATGTTTTTATTTAAAATACCCTCTGAAAAGAAAGGAAACGACAGGTGCTGAAAGCGAGCTTTTTGGCCTCTGTCGTTTCCTTTCTCTGTTTTTGTCCGTGGAATGAACAATGGAAGTCCGAGCTCATCGCTAATTCGATGCGGCCGCAAGGGGTTCGCGTCAGCGGGTGTTGGCGGGTGTCGGGGCTGGCTTAACTATGCGGCATCAGAGCAGATTGTACTGAGAGTGCACCATATGCGGTGTGAAATACCGCACAGATGCGTAAGGAGAAAATACCGCATCAGGCGCCATTCGCCATTCAGGCTGCGCAACTGTTGGGAAGGGCGATCGGTGCGGGCCTCTTCGCTATTACGCCAGCTGGCGAAAGGGGGATGTGCTGCAAGGCGATTAAGTTGGGTAACGCCAGGGTTTTCCCAGTCACGACGTTGTAAAACGACGGCCAGTGAATTGTAATACGACTCACTATAGGGC","ns":"TCGGGGCTAACTGTAACCGAAAGAAGATGCGGATTATTTAGTGGGGCCTAACCAGTTTGTCGGAATACTTCGGTGTTTTGCCAAACTCTCGCAAGGCCGTCCAGTTTCAAGACGTCGCATGATAAAGAGATCGATGTATTAGGCCAATTAGTAGCTGAAAGGTCGCTGGTTCTTGGATCAAAGCAGCGCGGCGAGAAGCA","lox71":"ATAACTTCGTATAATGTATGCTATACGAACGGTA","nat_left":350,"off":{"gfp":855,"attbl":930,"mch":2425,"arr":2484,"arrE":3186},"feats":[{"name":"T7Te terminator","type":"terminator","start":33,"end":61,"strand":-1},{"name":"ECK120010815","type":"misc_feature","start":1636,"end":1667,"strand":1},{"name":"lox66","type":"protein_bind","start":1667,"end":1701,"strand":1},{"name":"CDS","type":"CDS","start":1711,"end":2425,"strand":-1},{"name":"mCherry","type":"CDS","start":1711,"end":2425,"strand":-1},{"name":"synthesis","type":"misc_feature","start":2398,"end":2425,"strand":1},{"name":"BBa_B0015 Terminator","type":"misc_feature","start":1502,"end":1631,"strand":1},{"name":"rrnB T1 terminator","type":"terminator","start":1510,"end":1582,"strand":1},{"name":"T7Te terminator","type":"terminator","start":1597,"end":1625,"strand":1},{"name":"proD","type":"misc_feature","start":1342,"end":1486,"strand":1},{"name":"BBa_J72163 GlpT Promoter","type":"misc_feature","start":1146,"end":1276,"strand":1},{"name":"ECK120010831","type":"misc_feature","start":1135,"end":1143,"strand":-1},{"name":"Bxb1 attP","type":"protein_bind","start":1280,"end":1338,"strand":1},{"name":"BBa_B0015 Terminator","type":"misc_feature","start":988,"end":1117,"strand":-1},{"name":"rrnB T1 terminator","type":"terminator","start":1037,"end":1109,"strand":-1},{"name":"T7Te terminator","type":"terminator","start":994,"end":1022,"strand":-1},{"name":"T7Te terminator","type":"terminator","start":5682,"end":5710,"strand":1},{"name":"SP6 promoter","type":"promoter","start":5722,"end":5741,"strand":-1},{"name":"lacZ\u03b1","type":"CDS","start":5716,"end":5763,"strand":-1},{"name":"loxP","type":"protein_bind","start":12793,"end":12795,"strand":-1},{"name":"M13 rev","type":"primer_bind","start":5758,"end":5775,"strand":-1},{"name":"cos","type":"misc_feature","start":12377,"end":12776,"strand":1},{"name":"incC","type":"misc_feature","start":8849,"end":9100,"strand":1},{"name":"repE","type":"CDS","start":8091,"end":8847,"strand":1},{"name":"sopC","type":"misc_feature","start":11644,"end":12118,"strand":1},{"name":"sopB","type":"CDS","start":10600,"end":11572,"strand":1},{"name":"sopA","type":"CDS","start":9425,"end":10601,"strand":1},{"name":"ori2","type":"rep_origin","start":7781,"end":8001,"strand":1},{"name":"lac operator","type":"protein_bind","start":5782,"end":5799,"strand":1},{"name":"CAP binding site","type":"protein_bind","start":5851,"end":5873,"strand":1},{"name":"lac promoter","type":"promoter","start":5806,"end":5837,"strand":-1},{"name":"CmR","type":"CDS","start":6092,"end":6752,"strand":-1},{"name":"cat promoter","type":"promoter","start":6752,"end":6855,"strand":-1},{"name":"M13 fwd","type":"primer_bind","start":13088,"end":13105,"strand":1},{"name":"MCS","type":"misc_feature","start":0,"end":25,"strand":1},{"name":"T7 promoter","type":"promoter","start":13111,"end":13130,"strand":1},{"name":"rrnB T1 terminator","type":"terminator","start":76,"end":148,"strand":-1},{"name":"Bxb1 attB","type":"protein_bind","start":881,"end":930,"strand":1},{"name":"B0064","type":"misc_feature","start":861,"end":873,"strand":1},{"name":"amilGFP","type":"CDS","start":159,"end":855,"strand":-1},{"name":"T7Te terminator","type":"terminator","start":3200,"end":3228,"strand":-1},{"name":"rrnB T1 terminator","type":"terminator","start":3243,"end":3315,"strand":-1},{"name":"Cre","type":"CDS","start":3360,"end":4389,"strand":-1},{"name":"Bxb1 attB","type":"protein_bind","start":2435,"end":2484,"strand":1},{"name":"ssrA tag (LVA)","type":"CDS","start":3327,"end":3360,"strand":-1},{"name":"BBa_B0015 Terminator","type":"misc_feature","start":3194,"end":3323,"strand":-1},{"name":"araC","type":"CDS","start":4708,"end":5587,"strand":1},{"name":"rrnB T1 terminator","type":"terminator","start":5595,"end":5667,"strand":1},{"name":"RBS","type":"RBS","start":4395,"end":4407,"strand":1},{"name":"pBAD","type":"misc_feature","start":4407,"end":4708,"strand":-1},{"name":"\u7247\u6bb5 1.\u6b63\u5411","type":"primer_bind","start":0,"end":18,"strand":1},{"name":"\u7247\u6bb5 1.\u53cd\u5411","type":"primer_bind","start":968,"end":988,"strand":-1},{"name":"termin_GFP_f","type":"primer_bind","start":15,"end":47,"strand":1},{"name":"termin_GFP_f","type":"primer_bind","start":963,"end":1008,"strand":1},{"name":"termin_GFP_f","type":"primer_bind","start":1611,"end":1632,"strand":-1},{"name":"termin_GFP_f","type":"primer_bind","start":3194,"end":3214,"strand":1},{"name":"termin_GFP_f","type":"primer_bind","start":5696,"end":5716,"strand":-1},{"name":"termin_GFP_f","type":"primer_bind","start":27,"end":47,"strand":1},{"name":"termin_GFP_r","type":"primer_bind","start":1107,"end":1135,"strand":-1},{"name":"termin_GFP_r","type":"primer_bind","start":1491,"end":1512,"strand":1},{"name":"termin_GFP_r","type":"primer_bind","start":3313,"end":3333,"strand":-1},{"name":"termin_mCherry_F","type":"primer_bind","start":1107,"end":1128,"strand":-1},{"name":"termin_mCherry_F","type":"primer_bind","start":1485,"end":1512,"strand":1},{"name":"termin_mCherry_F","type":"primer_bind","start":3313,"end":3333,"strand":-1},{"name":"termin_mCherry_R","type":"primer_bind","start":27,"end":47,"strand":1},{"name":"termin_mCherry_R","type":"primer_bind","start":987,"end":1008,"strand":1},{"name":"termin_mCherry_R","type":"primer_bind","start":1611,"end":1639,"strand":-1},{"name":"termin_mCherry_R","type":"primer_bind","start":3194,"end":3214,"strand":1},{"name":"termin_mCherry_R","type":"primer_bind","start":5696,"end":5716,"strand":-1},{"name":"\u5f15\u7269 1","type":"primer_bind","start":1466,"end":1486,"strand":-1},{"name":"Promoter_R","type":"primer_bind","start":1466,"end":1492,"strand":-1},{"name":"Promoter_F","type":"primer_bind","start":1127,"end":1158,"strand":1},{"name":"A2_piece1_rev","type":"primer_bind","start":1677,"end":1709,"strand":-1},{"name":"mcherry_fwd","type":"primer_bind","start":2410,"end":2433,"strand":-1},{"name":"mcherry_rev","type":"primer_bind","start":1703,"end":1727,"strand":1},{"name":"A2_piece2_fwd","type":"primer_bind","start":915,"end":930,"strand":-1},{"name":"A2_piece2_fwd","type":"primer_bind","start":2427,"end":2450,"strand":1},{"name":"mCherry_ECK_R","type":"primer_bind","start":1649,"end":1677,"strand":-1},{"name":"\u5f15\u7269 3","type":"primer_bind","start":1637,"end":1658,"strand":1},{"name":"A2_new_F","type":"primer_bind","start":1631,"end":1658,"strand":1},{"name":"\u7247\u6bb5 3.\u53cd\u5411","type":"primer_bind","start":4265,"end":4286,"strand":-1},{"name":"\u7247\u6bb5 4.\u6b63\u5411","type":"primer_bind","start":4261,"end":4286,"strand":1},{"name":"?","type":"primer_bind","start":5704,"end":5741,"strand":-1},{"name":"\u7247\u6bb5 4.\u6b63\u5411","type":"primer_bind","start":4261,"end":4286,"strand":1},{"name":"\u7247\u6bb5 4.\u53cd\u5411","type":"primer_bind","start":5704,"end":5741,"strand":-1},{"name":"Piece_A_fwd","type":"primer_bind","start":5716,"end":5741,"strand":1},{"name":"Piece_A_rev","type":"primer_bind","start":12768,"end":12806,"strand":-1},{"name":"Piece_B_fwd","type":"primer_bind","start":5947,"end":5965,"strand":-1},{"name":"Piece_B_fwd","type":"primer_bind","start":12781,"end":12818,"strand":1},{"name":"Piece_B_rev","type":"primer_bind","start":0,"end":25,"strand":-1},{"name":"m13_rev (1)","type":"primer_bind","start":4265,"end":4286,"strand":-1},{"name":"termin_f","type":"primer_bind","start":27,"end":47,"strand":1},{"name":"termin_f","type":"primer_bind","start":988,"end":1008,"strand":1},{"name":"termin_f","type":"primer_bind","start":1611,"end":1631,"strand":-1},{"name":"termin_f","type":"primer_bind","start":3194,"end":3214,"strand":1},{"name":"termin_f","type":"primer_bind","start":5696,"end":5716,"strand":-1},{"name":"termin_r","type":"primer_bind","start":1107,"end":1127,"strand":-1},{"name":"termin_r","type":"primer_bind","start":1492,"end":1512,"strand":1},{"name":"termin_r","type":"primer_bind","start":3313,"end":3333,"strand":-1}]};
+const DEF={n_sites:5,spacer_bp:773,base_right_bp:773,bxb1_base_bp:773,lox_site_bp:34,
+  left_arm_bp:773,gamma:1,k_a0:.38,k_b0:.14,beta:1.3,r_a:.56,r_b:.01,alpha:.01};
+const BIN=.05, MINY=1e-4;
+
+/* ===== design_model.py port (verified to 1e-16) ===== */
+const dInt=(r,t)=>-Math.expm1(-r*t)/r;
+function bind(br,ex,fx,t){const gap=fx-ex;
+  if(Math.abs(gap)<=1e-10*Math.max(fx,ex)){const r=(fx+ex)/2,x=r*t,o=br*t*Math.exp(-x);let I;
+    if(x<.1){let tm=1,s=.5;for(let m=1;m<30;m++){tm*=-x/m;s+=tm/(m+2);}I=br*t*t*s;}
+    else I=br*(-Math.expm1(-x)-x*Math.exp(-x))/(r*r);return [o,I];}
+  const sl=Math.min(fx,ex),ag=Math.abs(gap);
+  return [br*Math.exp(-sl*t)*-Math.expm1(-ag*t)/ag, br*(dInt(ex,t)-dInt(fx,t))/gap];}
+function creOutcomes(m){const u=m.spacer_bp+m.lox_site_bp,ds=[];
+  for(let i=1;i<=m.n_sites;i++)ds.push(m.base_right_bp+i*m.spacer_bp+(i-1)*m.lox_site_bp);
+  const w=ds.map(d=>Math.pow(d/ds[0],-m.gamma)),T=w.reduce((a,b)=>a+b,0);
+  return ds.map((d,j)=>({site:j+1,right_arm_bp:m.bxb1_base_bp+(j+1)*u,selection_probability:w[j]/T}));}
+function siteAt(m,hb,t){const ka=m.k_a0*Math.pow(m.left_arm_bp,-m.beta),kb=m.k_b0*Math.pow(hb,-m.beta);
+  const va=m.alpha*ka,vb=m.alpha*kb,q=ka+kb+m.r_a+m.r_b;
+  const [,ima]=bind(m.r_a,va+kb,q,t),[,imb]=bind(m.r_b,vb+ka,q,t),id=dInt(q,t);
+  const la=ka*id+va*ima+ka*imb, lb=kb*id+vb*imb+kb*ima, df=la+lb;
+  return {differentiated_yield:df,type_a_fraction:df>0?la/df:null};}
+const binOf=f=>{const n=Math.ceil(1/BIN);return Math.min(n-1,Math.max(0,Math.floor(f/BIN+1e-12)));};
+const hitP=(q,N)=>(N<=0||q<=0)?0:(q>=1?1:-Math.expm1(N*Math.log1p(-q)));
+function structs(m,t,N){return creOutcomes(m).map(r=>{const s=siteAt(m,r.right_arm_bp,t),f=s.type_a_fraction;
+  return {...r,...s,fraction:f,bin:binOf(f),usable:s.differentiated_yield>=MINY,
+    wells:N*r.selection_probability};});}
+
+function scan(lo,hi,t,N,la){const out=[];
+  for(let n=1;n<=10;n++)for(let sp=150;sp<=2000;sp+=50){
+    const m={...DEF,n_sites:n,spacer_bp:sp,left_arm_bp:la};
+    const rows=structs(m,t,N).filter(r=>r.usable); if(!rows.length)continue;
+    const fr=rows.map(r=>r.fraction),mn=Math.min(...fr),mx=Math.max(...fr);
+    const inR=rows.filter(r=>r.fraction>=lo-1e-12&&r.fraction<=hi+1e-12);
+    const cov=Math.min(1,Math.max(0,(Math.min(mx,hi)-Math.max(mn,lo))/Math.max(hi-lo,1e-9)));
+    out.push({n_sites:n,spacer_bp:sp,min:mn,max:mx,rows,
+      types:new Set(rows.map(r=>r.bin)).size,
+      inRangeTypes:new Set(inR.map(r=>r.bin)).size, inR, cov,
+      arr:n*(sp+34)});}
+  out.sort((a,b)=>b.inRangeTypes-a.inRangeTypes||b.cov-a.cov||a.arr-b.arr||a.n_sites-b.n_sites);
+  return out;}
+
+/* ===== construction ===== */
+const tile=(s,L)=>{let o='';while(o.length<L)o+=s;return o.slice(0,L);};
+const RC={A:'T',T:'A',G:'C',C:'G',N:'N'};
+const rc=x=>x.split('').reverse().map(ch=>RC[ch]||'N').join('');
+const clean=t=>t.replace(/^>.*$/gm,'').replace(/[^ACGTacgtNn]/g,'').toUpperCase();
+function build(d,payload,side,leftArm){
+  const extra=Math.max(0,Math.round(leftArm)-P.nat_left);
+  const pL=side==='left'?payload.length:0, pR=side==='right'?payload.length:0;
+  const arrNew=d.n_sites*(d.spacer_bp+P.lox71.length), arrOld=P.off.arrE-P.off.arr;
+  const shift=st=> st<P.off.gfp?0 : st<P.off.attbl?pL : st<P.off.mch?pL+extra
+              : st<P.off.arr?pL+extra+pR : pL+extra+pR+(arrNew-arrOld);
+  const F=P.feats.map(f=>({...f,start:f.start+shift(f.start),end:f.end+shift(f.start)}));
+  let seq='',pos=0; const add=t=>{seq+=t;pos+=t.length;};
+  const mark=(name,type,len,strand,x)=>{F.push({name,type,start:pos,end:pos+len,strand:strand||1,...(x||{})});};
+  add(P.A);
+  // Both reporters sit on the minus strand, so the payload is inserted as its
+  // reverse complement and annotated complement(): co-oriented with the reporter.
+  if(pL){mark(slug(),'CDS',pL,-1,{pay:1,arm:'amilGFP'});add(rc(payload));}
+  add(P.B);
+  if(extra){mark(`left-arm spacer (${extra} bp)`,'misc_feature',extra);add(tile(P.ns,extra));}
+  add(P.C);
+  if(pR){mark(slug(),'CDS',pR,-1,{pay:1,arm:'mCherry'});add(rc(payload));}
+  add(P.D);
+  const nsq=tile(P.ns,d.spacer_bp);
+  for(let i=1;i<=d.n_sites;i++){
+    mark(`ns${i} (${d.spacer_bp} bp)`,'misc_feature',nsq.length);add(nsq);
+    mark(`lox71_${i}`,'protein_bind',P.lox71.length,-1);add(P.lox71);}
+  const arr=seq.slice(pos-arrNew);
+  add(P.E);
+  return {seq,feats:F.sort((a,b)=>a.start-b.start),arr,nsq,extra,
+    unit:nsq+P.lox71, leftArm:P.nat_left+extra};
+}
+
+/* ===== GenBank ===== */
+function gb(name,seq,feats,note,extra,topo){
+  const d=new Date(),M=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const stamp=`${String(d.getDate()).padStart(2,'0')}-${M[d.getMonth()]}-${d.getFullYear()}`;
+  let o='LOCUS'.padEnd(12)+name.slice(0,16).padEnd(16)+' '+String(seq.length).padStart(11)+
+        ' bp    '+'DNA'.padEnd(6)+'  '+(topo||'circular').padEnd(8)+' SYN '+stamp+'\n';
+  o+='DEFINITION  '+note+'\nACCESSION   .\nVERSION     .\nKEYWORDS    MOSAIC; Cre-Bxb1; ratio library.\n';
+  o+='SOURCE      synthetic DNA construct\n  ORGANISM  synthetic DNA construct\n';
+  o+='COMMENT     Generated by PALETTE, the MOSAIC ratio-library designer (iGEM 2026 ShanghaiTech-China).\n';
+  (extra||[]).forEach(l=>{o+='COMMENT     '+l+'\n';});
+  o+='COMMENT     Verify the construct before synthesis or cloning.\n';
+  o+='FEATURES             Location/Qualifiers\n';
+  o+=`     source          1..${seq.length}\n                     /organism="synthetic DNA construct"\n`;
+  for(const f of feats){
+    const loc=f.strand===-1?`complement(${f.start+1}..${f.end})`:`${f.start+1}..${f.end}`;
+    o+='     '+(f.type||'misc_feature').padEnd(16)+loc+'\n';
+    o+='                     /label="'+String(f.name).replace(/"/g,"'")+'"\n';}
+  o+='ORIGIN\n';
+  for(let i=0;i<seq.length;i+=60){let l=String(i+1).padStart(9);
+    for(let j=i;j<Math.min(i+60,seq.length);j+=10)l+=' '+seq.slice(j,Math.min(j+10,seq.length)).toLowerCase();
+    o+=l+'\n';}
+  return o+'//\n';}
+
+/* ===== drawing ===== */
+// Hue-space interpolation red -> orange -> yellow -> green keeps saturation up;
+// mixing the two in RGB would pass through a muddy olive instead.
+const mix=f=>{const t=Math.min(1,Math.max(0,f)),h=(4+t*129)/360,sa=.88,l=(57+t*5)/100;
+  const q=l<.5?l*(1+sa):l+sa-l*sa,p=2*l-q;
+  const cv=x=>{x=(x+1)%1;const v=x<1/6?p+(q-p)*6*x:x<.5?q:x<2/3?p+(q-p)*(2/3-x)*6:p;
+    return Math.round(v*255).toString(16).padStart(2,'0');};
+  return '#'+cv(h+1/3)+cv(h)+cv(h-1/3);};
+const $=id=>document.getElementById(id);
+let S={pick:0,side:'right'};
+function slug(){return ($('fname').value||'payload').trim().replace(/[^A-Za-z0-9_.-]+/g,'-')
+    .replace(/^-+|-+$/g,'').slice(0,28) || 'payload';}
+function nm(d){return `mosaic-n${d.n_sites}-${slug()}`;}
+
+function chart(d,lo,hi){
+  const R=d.rows,W=Math.max(380,R.length*72+70),H=250,L=50,B=52;
+  const y=f=>18+(H-B-18)*(1-f), bw=Math.min(44,(W-L-26)/R.length-10);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:${Math.min(W,600)}px">`;
+  for(let g=0;g<=4;g++){const yy=18+(H-B-18)*g/4;
+    s+=`<line x1="${L}" x2="${W-12}" y1="${yy}" y2="${yy}" stroke="#26262a"/>`+
+       `<text x="${L-8}" y="${yy+4}" fill="#9ca3af" font-size="11" font-family="Lexend" text-anchor="end">${((1-g/4)*100).toFixed(0)}%</text>`;}
+  s+=`<rect x="${L}" y="${y(hi)}" width="${W-12-L}" height="${Math.max(1,y(lo)-y(hi))}" fill="#c6da58" opacity=".13"/>`;
+  R.forEach((r,i)=>{const x=L+14+i*((W-L-28)/R.length),yy=y(r.fraction),inR=r.fraction>=lo-1e-12&&r.fraction<=hi+1e-12;
+    s+=`<rect x="${x}" y="${yy}" width="${bw}" height="${Math.max(1,y(0)-yy)}" rx="2" fill="${mix(r.fraction)}" opacity="${inR?1:.42}"/>`+
+       `<text x="${x+bw/2}" y="${yy-6}" fill="${inR?'#f3f4f6':'#9ca3af'}" font-size="11" font-family="Lexend" font-weight="${inR?600:300}" text-anchor="middle">${(r.fraction*100).toFixed(1)}</text>`+
+       `<text x="${x+bw/2}" y="${H-B+18}" fill="#9ca3af" font-size="10.5" font-family="Lexend" text-anchor="middle">lox71-${r.site}</text>`+
+       `<text x="${x+bw/2}" y="${H-B+32}" fill="#6b7280" font-size="10" font-family="Lexend" text-anchor="middle">${r.wells.toFixed(1)}w</text>`;});
+  s+=`<text x="${L}" y="${H-5}" fill="#9ca3af" font-size="10.5" font-family="Lexend">`+
+     `amilGFP fraction per architecture (w = expected wells)</text>`;
+  return s+'</svg>';}
+
+function plate(d,N){
+  const C=12,R=Math.ceil(Math.min(N,96)/12),cw=31,ch=29,W=C*cw+40,H=R*ch+38;
+  const p=d.rows.map(r=>r.selection_probability),cum=[];let a=0;p.forEach(v=>{a+=v;cum.push(a);});
+  let sd=2026;const rnd=()=>{sd=(sd*1103515245+12345)&0x7fffffff;return sd/0x7fffffff;};
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;
+  for(let i=0;i<R;i++)s+=`<text x="10" y="${28+i*ch}" fill="#9ca3af" font-size="10" font-family="Lexend">${'ABCDEFGH'[i]||''}</text>`;
+  for(let j=0;j<C;j++)s+=`<text x="${34+j*cw+11}" y="14" fill="#9ca3af" font-size="10" font-family="Lexend" text-anchor="middle">${j+1}</text>`;
+  for(let i=0;i<R;i++)for(let j=0;j<C;j++){const k=i*C+j,cx=34+j*cw+11,cy=24+i*ch;
+    if(k>=Math.min(N,96)){s+=`<circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="#1a1a1d"/>`;continue;}
+    const u=rnd();let q=cum.findIndex(c=>u<=c);if(q<0)q=p.length-1;const r=d.rows[q];
+    s+=`<circle cx="${cx}" cy="${cy}" r="10" fill="${mix(r.fraction)}" stroke="#0a0a0a" stroke-width="1.5"><title>${'ABCDEFGH'[i]}${j+1} · lox71-${r.site} · amilGFP ${(r.fraction*100).toFixed(1)}% / mCherry ${((1-r.fraction)*100).toFixed(1)}%</title></circle>`;}
+  s+=`<text x="34" y="${H-6}" fill="#9ca3af" font-size="10" font-family="Lexend">`+
+     `<tspan fill="#3ff063">■</tspan> amilGFP &#160;<tspan fill="#f0291e">■</tspan> mCherry &#160;— well colour is the two mixed in proportion</text>`;
+  return s+'</svg>';}
+
+function ptable(d,N,lo,hi){
+  const by={};d.rows.forEach(r=>{const k=r.bin;(by[k]=by[k]||{wells:0,p:0,fr:[],bin:k}); by[k].wells+=r.wells;by[k].p+=r.selection_probability;by[k].fr.push(r.fraction);});
+  const rows=Object.values(by).sort((a,b)=>a.bin-b.bin);
+  let s=`<span class="lbl">Ratio types</span><table><thead><tr>`+
+    `<th>amilGFP %</th><th>Wells</th><th>P(≥1)</th></tr></thead><tbody>`;
+  rows.forEach(r=>{const mn=Math.min(...r.fr),mx=Math.max(...r.fr);
+    const inR=mx>=lo-1e-12&&mn<=hi+1e-12;
+    s+=`<tr${inR?' class="pick"':''}><td><span class="swatch" style="background:${mix((mn+mx)/2)}"></span>`+
+       `${(mn*100).toFixed(1)}${mx>mn?'–'+(mx*100).toFixed(1):''}</td>`+
+       `<td>${r.wells.toFixed(1)}</td><td>${(hitP(r.p,N)*100).toFixed(1)}%</td></tr>`;});
+  const tot=rows.reduce((a,r)=>a+r.wells,0);
+  s+=`</tbody></table><div class="lbl" style="margin-top:12px;text-transform:none;letter-spacing:0;font-weight:300">`+
+     `${rows.length} ratio types &#183; ${tot.toFixed(0)} wells total &#183; highlighted rows fall inside the target range</div>`;
+  return s;}
+
+function map(b,d){
+  const Z=380,c=Z/2,R=96,N=b.seq.length,pol=(a,r)=>[c+r*Math.sin(a),c-r*Math.cos(a)];
+  const RE=/^amilGFP$|^mCherry$|attP|attB|lox66|left-arm spacer/i;
+  const KEY=f=>f.pay||RE.test(f.name)||/^ns\d|^lox71_/i.test(f.name);
+  const LBL=f=>f.pay||RE.test(f.name);
+  const col=f=>f.pay?'#c6da58'
+    :/lox|att/i.test(f.name)?'#e84d85' :/^ns\d|left-arm spacer/i.test(f.name)?'#24b8ec'
+    :/^amilGFP$/i.test(f.name)?'#3ff063' :/^mCherry$/i.test(f.name)?'#f0291e':'#4b5563';
+  const arc=(s0,e0,r,st,w,t)=>{const a0=2*Math.PI*s0/N,a1=2*Math.PI*e0/N;
+    if(a1-a0<.007){const [x,y]=pol((a0+a1)/2,r);
+      return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(w/2).toFixed(1)}" fill="${st}">${t}</circle>`;}
+    const [x0,y0]=pol(a0,r),[x1,y1]=pol(a1,r);
+    return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${a1-a0>Math.PI?1:0} 1 `+
+           `${x1.toFixed(1)} ${y1.toFixed(1)}" fill="none" stroke="${st}" stroke-width="${w}">${t}</path>`;};
+  let s=`<svg viewBox="0 0 ${Z} ${Z}" width="100%">`;
+  s+=`<circle cx="${c}" cy="${c}" r="${R}" fill="none" stroke="#26262a" stroke-width="6"/>`;
+  // Backbone elements share one faint ring inside the band; only the engineered
+  // parts get their own lanes outside it, so the two never collide.
+  b.feats.filter(f=>!KEY(f)).forEach(f=>{
+    s+=arc(f.start,f.end,R-9,'#32323a',4,`<title>${f.name}</title>`);});
+  const pad=Math.ceil(N*4/(2*Math.PI*R)), L=[];
+  const keys=b.feats.filter(KEY).sort((x,y)=>x.start-y.start)
+    .map(f=>{let k=L.findIndex(e=>e<=f.start-pad); if(k<0)k=L.length; L[k]=f.end+pad; return {f,k};});
+  const kMax=Math.max(0,...keys.map(i=>i.k));
+  keys.forEach(({f,k})=>{s+=arc(f.start,f.end,R+8+k*8,col(f),6,
+    `<title>${f.name} &#183; ${f.start+1}..${f.end}</title>`);});
+  const outR=R+8+kMax*8+6, seen=new Set(), lab=[];
+  b.feats.filter(LBL).forEach(f=>{
+    const n=f.name.replace(/ *[·(].*$/,''); if(seen.has(n))return; seen.add(n);
+    const a=2*Math.PI*((f.start+f.end)/2)/N,[x,y]=pol(a,outR+11);
+    lab.push({n,a,x,y,right:Math.sin(a)>=0,col:col(f)});});
+  [true,false].forEach(side=>{const g=lab.filter(l=>l.right===side).sort((p,q)=>p.y-q.y);
+    for(let i=1;i<g.length;i++) if(g[i].y-g[i-1].y<12.5) g[i].y=g[i-1].y+12.5;
+    if(g.length){const over=g[g.length-1].y-(Z-8);
+      if(over>0){const room=Math.max(0,g[0].y-10),sh=Math.min(over,room);g.forEach(l=>l.y-=sh);}}});
+  lab.forEach(l=>{const [ax,ay]=pol(l.a,outR);
+    // Clamp by measured text width so no label runs past the canvas edge.
+    const w=l.n.length*5.35+5;
+    const tx=l.right?Math.min(Math.max(l.x,c+16),Z-5-w):Math.max(Math.min(l.x,c-16),5+w);
+    s+=`<polyline points="${ax.toFixed(1)},${ay.toFixed(1)} ${tx},${(l.y-3).toFixed(1)}" `+
+       `fill="none" stroke="#3a3a42" stroke-width="1"/>`;
+    s+=`<text x="${tx}" y="${l.y.toFixed(1)}" fill="${l.col}" font-size="9.5" font-family="Lexend" `+
+       `text-anchor="${l.right?'start':'end'}">${l.n.slice(0,22)}</text>`;});
+  const ttl=nm(d), tfs=ttl.length>24?9:ttl.length>18?10.5:12.5;
+  s+=`<text x="${c}" y="${c-10}" fill="#f3f4f6" font-size="${tfs}" font-family="Lexend" font-weight="600" text-anchor="middle">${ttl}</text>`+
+     `<text x="${c}" y="${c+10}" fill="#24b8ec" font-size="13.5" font-family="Lexend" font-weight="700" text-anchor="middle">${N.toLocaleString()} bp</text>`+
+     `<text x="${c}" y="${c+27}" fill="#9ca3af" font-size="9.5" font-family="Lexend" text-anchor="middle">${d.n_sites}&#215;${d.spacer_bp} ns &#183; left arm ${b.leftArm}</text>`;
+  return s+'</svg>';}
+
+/* ===== render ===== */
+function render(){
+  const lo=Math.min(+$('fmin').value,+$('fmax').value)/100, hi=Math.max(+$('fmin').value,+$('fmax').value)/100;
+  const t=+$('time').value, N=Math.max(1,+$('cols').value||96), la=Math.max(350,+$('larm').value||773);
+  const pay=clean($('payload').value);
+  $('timeVal').textContent=t+' h';
+  $('pinfo').textContent=pay?`${pay.length} bp read`:'leave empty for no insert';
+  $('sideL').setAttribute('aria-pressed',S.side==='left'); $('sideR').setAttribute('aria-pressed',S.side==='right');
+  $('sideNote').innerHTML=S.side==='right'
+    ? 'Between mCherry and attB_right, matching the HindIII position in ASPIRE_BAC_v2. Inserted on the minus strand, co-oriented with mCherry.'
+    : 'Between amilGFP and attB_left, matching the NheI position in ASPIRE_BAC_v2. Inserted on the minus strand, co-oriented with amilGFP.';
+
+  const ds=scan(lo,hi,t,N,la); if(S.pick>=ds.length)S.pick=0;
+  const tb=$('rank'); tb.innerHTML='';
+  ds.slice(0,12).forEach((d,i)=>{const tr=document.createElement('tr');
+    if(i===S.pick)tr.className='pick';
+    tr.innerHTML=`<td>${i+1}</td><td>${d.n_sites}</td><td>${d.spacer_bp}</td>`+
+      `<td>${(d.min*100).toFixed(1)}–${(d.max*100).toFixed(1)}%</td><td>${d.types}</td>`+
+      `<td>${d.inRangeTypes}</td><td>${d.arr.toLocaleString()}</td>`;
+    tr.onclick=()=>{S.pick=i;render();};tb.appendChild(tr);});
+  if(!ds.length){$('note').innerHTML='No feasible design in this range. Widen it, or change the left-arm length.';return;}
+  const d=ds[S.pick];
+  $('note').innerHTML='Ranked by ratio types inside the range, then coverage of it, then array length. Click a row to select.';
+  const q=d.inR.reduce((a,r)=>a+r.selection_probability,0);
+  $('stats').innerHTML=
+    `<div><b>${d.n_sites}</b><span>lox71 sites</span></div>`+
+    `<div><b>${d.spacer_bp}</b><span>ns bp</span></div>`+
+    `<div><b>${(d.min*100).toFixed(1)}–${(d.max*100).toFixed(1)}%</b><span>span</span></div>`+
+    `<div><b>${d.inRangeTypes}</b><span>in-range types</span></div>`+
+    `<div><b>${(hitP(q,N)*100).toFixed(1)}%</b><span>P(hit) @ ${N}</span></div>`;
+  $('chart').innerHTML=chart(d,lo,hi);
+  $('plate').innerHTML=plate(d,N);
+  $('ptab').innerHTML=ptable(d,N,lo,hi);
+  const b=build(d,pay,S.side,la); S.b=b; S.d=d;
+  $('map').innerHTML=map(b,d);
+  {const g=b.feats.find(f=>f.name==='amilGFP'),
+     lx=b.feats.filter(f=>/^lox71_\d+$/.test(f.name)).sort((x,y)=>y.end-x.end)[0];
+   const L=lx&&g?lx.end-g.start:0;
+   $('fraginfo').innerHTML=`Plasmid ${b.seq.length.toLocaleString()} bp, circular &#183; `+
+     `synthesis fragment ${L.toLocaleString()} bp, linear (amilGFP &#8594; lox71_${d.n_sites})`+
+     (L>2000?` &#183; <span style="color:var(--orange)">over 2 kb — most vendors will split this into sub-fragments</span>`:'');}
+  if(!$('prev').hidden)$('prev').textContent=gbPlasmid().slice(0,6000)+'\n…';
+}
+function gbPlasmid(){const d=S.d,b=S.b;
+  return gb(nm(d),b.seq,b.feats,
+    `${nm(d)} | MOSAIC ratio-library plasmid | ${d.n_sites} x ${d.spacer_bp} bp ns | left arm ${b.leftArm} bp`,
+    [`Design: n_sites=${d.n_sites}, spacer_bp=${d.spacer_bp}, left_arm_bp=${b.leftArm}`,
+     `Predicted amilGFP fraction span: ${(d.min*100).toFixed(2)}% - ${(d.max*100).toFixed(2)}%`,
+     `Payload arm: ${S.side==='right'?'mCherry (HindIII position in ASPIRE_BAC_v2)':'amilGFP (NheI position in ASPIRE_BAC_v2)'}`]);}
+function gbFrag(){const d=S.d,b=S.b;
+  // One synthesis fragment covering the whole engineered stretch: from the start of
+  // amilGFP through the end of the last lox71. Delivered linear, to be cloned back
+  // into the Super_ASPIRE backbone between those two flanks.
+  const gfp=b.feats.find(f=>f.name==='amilGFP');
+  const lox=b.feats.filter(f=>/^lox71_\d+$/.test(f.name)).sort((x,y)=>y.end-x.end)[0];
+  if(!gfp||!lox) return gbPlasmid();
+  const a0=gfp.start,z=lox.end,sub=b.seq.slice(a0,z);
+  const fe=b.feats.filter(f=>f.start>=a0&&f.end<=z).map(f=>({...f,start:f.start-a0,end:f.end-a0}));
+  return gb(nm(d)+'-synth',sub,fe,
+    `${nm(d)} synthesis fragment | amilGFP through lox71_${d.n_sites} | ${z-a0} bp | linear`,
+    [`Covers the complete engineered stretch: amilGFP, the payload, attB_left,`,
+     `the ${b.extra} bp left-arm spacer, attP, lox66, mCherry, attB_right and the`,
+     `${d.n_sites} x (${d.spacer_bp} bp ns + 34 bp lox71) flipping array.`,
+     `Left flank ends at amilGFP start; right flank begins after lox71_${d.n_sites}.`],
+    'linear');}
+
+function save(n,txt){try{const u=URL.createObjectURL(new Blob([txt],{type:'chemical/seq-na-genbank'}));
+  const a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},1500);$('warn').innerHTML='';}
+  catch(e){$('warn').innerHTML='<div class="note">This preview blocks page-initiated downloads. Use “Show text” and copy. Downloads work once the page is deployed.</div>';}}
+$('dl1').onclick=()=>save(nm(S.d)+'.gb',gbPlasmid());
+$('dl2').onclick=()=>save(nm(S.d)+'-synth.gb',gbFrag());
+$('tog').onclick=()=>{const p=$('prev');p.hidden=!p.hidden;
+  $('tog').textContent=p.hidden?'Show text':'Hide text';
+  if(!p.hidden)p.textContent=gbPlasmid().slice(0,6000)+'\n…';};
+$('sideL').onclick=()=>{S.side='left';render();};
+$('sideR').onclick=()=>{S.side='right';render();};
+$('share').onclick=()=>{const q=`fmin=${$('fmin').value}&fmax=${$('fmax').value}&cols=${$('cols').value}`+
+  `&time=${$('time').value}&larm=${$('larm').value}&fname=${encodeURIComponent($('fname').value)}&side=${S.side}&pick=${S.pick}`;
+  const url=location.origin+location.pathname+'#'+q;
+  navigator.clipboard?.writeText(url).then(()=>{$('shareMsg').textContent='copied';
+    setTimeout(()=>$('shareMsg').textContent='',2200);}).catch(()=>{$('shareMsg').textContent=url;});};
+(function(){const h=new URLSearchParams(location.hash.slice(1));
+  ['fmin','fmax','cols','time','larm','fname'].forEach(k=>{if(h.get(k))$(k).value=h.get(k);});
+  if(h.get('side'))S.side=h.get('side'); if(h.get('pick'))S.pick=+h.get('pick');})();
+['fmin','fmax','cols','time','larm','payload','fname'].forEach(id=>
+  $(id).addEventListener('input',()=>{if(id!=='payload'&&id!=='time'&&id!=='fname')S.pick=0;render();}));
+render();
+</script>
+
+</body></html>
